@@ -28,7 +28,7 @@ def _run_discord_export_chat_cmd(
             "--token",
             user_token,
             "--channel",
-            channel_id,
+            str(channel_id),
             "--output",
             destination_file,
             "--after",
@@ -44,11 +44,11 @@ def _run_discord_export_chat_cmd(
 def _create_messages_from_json(msg_dict: Dict[str, Any]) -> List[Message]:
     messages: List[Message] = []
 
-    channel_id: str = msg_dict["channel"]["id"]
+    channel_id: int = int(msg_dict["channel"]["id"])
     channel_name: str = msg_dict["channel"]["name"]
 
     for msg in msg_dict["messages"]:
-        msg_id: str = msg["id"]
+        msg_id: int = int(msg["id"])
         msg_content: str = msg["content"]
         author_name: str = msg["author"]["name"]
 
@@ -59,10 +59,10 @@ def _create_messages_from_json(msg_dict: Dict[str, Any]) -> List[Message]:
             Message(
                 author_name=author_name,
                 content=msg_content,
-                id=msg_id,
+                message_id=msg_id,
                 channel_id=channel_id,
                 channel_name=channel_name,
-                timestamp=msg_timestamp,
+                message_timestamp=msg_timestamp,
             )
         )
 

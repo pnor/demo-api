@@ -5,6 +5,10 @@ from pydantic import BaseModel
 
 import type_aliases
 
+"""
+Core types sent in the API
+"""
+
 
 # - Server API Requests -
 
@@ -31,7 +35,7 @@ class GetKeywordReq(BaseModel):
 class Message(BaseModel):
     author_name: str
     content: str
-    id: type_aliases.Id
+    message_id: type_aliases.Id
     channel_id: type_aliases.ChannelId
     channel_name: str
-    timestamp: type_aliases.Date
+    message_timestamp: type_aliases.Date
