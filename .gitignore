@@ -12,3 +12,6 @@ venv
 
 notes.org
 .direnv
+
+# artifacts
+discord_download.json
