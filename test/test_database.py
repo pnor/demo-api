@@ -7,6 +7,7 @@ Test database operations work
 import sqlalchemy
 
 from database import Message
+
 from db_models import Database
 
 

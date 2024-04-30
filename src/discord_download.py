@@ -10,9 +10,10 @@ import datetime
 import subprocess
 import json
 import dateutil
+import os
 
-from type_aliases import ChannelId, Date, Filename, UserToken
-from models import Message
+from .type_aliases import ChannelId, Date, Filename, UserToken
+from .models import Message
 
 
 def _run_discord_export_chat_cmd(
@@ -82,9 +83,15 @@ def get_messages_from_last_7_days(
     # run the cmd to download into the file
     DISCORD_CMD_DOWNLOAD_FILE_NAME = "discord_download.json"
 
+    if os.path.exists(DISCORD_CMD_DOWNLOAD_FILE_NAME):
+        os.remove(DISCORD_CMD_DOWNLOAD_FILE_NAME)
+
     file_with_json = _run_discord_export_chat_cmd(
         user_token, channel_id, DISCORD_CMD_DOWNLOAD_FILE_NAME
     )
+
+    if not os.path.exists(file_with_json):
+        raise RuntimeError("Unable to create file with discord output")
 
     with open(file_with_json) as file:
         discord_json = json.load(file)

@@ -4,13 +4,12 @@
 User Facing API to store and get messages from the database
 """
 
-from typing import List, Dict, Any, Optional
+from typing import List
 from models import Message
-from type_aliases import ChannelId, Date, QueryArguements
+from type_aliases import QueryArguements
 
-import db_models
+from . import db_models
 
-import sqlalchemy.orm  # ...
 import sqlalchemy
 
 

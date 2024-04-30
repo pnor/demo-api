@@ -13,8 +13,8 @@ from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from sqlalchemy import Engine, Select, select
 
-from models import Message
-from type_aliases import ChannelId, Date, QueryArguements
+from .models import Message
+from .type_aliases import QueryArguements
 
 # ===== DB Tables ============
 
@@ -102,6 +102,10 @@ class Database:
         """
         Gets messages from the database, filtered based on `query`
         """
+        insp = sqlalchemy.inspect(self.engine)
+        if not insp.has_table(DBMessage.__tablename__):
+            return []
+
         # Helper Type classes
         WhereClause = Callable[[Select[Tuple[Any]]], Select[Any]]
 
@@ -128,7 +132,9 @@ class Database:
 
         # Keyword
         if query.keyword:
-            keyword_clause = lambda q: q.where(DBMessage.content.contains(keyword))
+            keyword_clause = lambda q: q.where(
+                DBMessage.content.contains(query.keyword)
+            )
 
         # Channel
         if query.channel:
