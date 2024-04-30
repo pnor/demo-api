@@ -54,8 +54,3 @@ case "$CMD" in
         echo "invalid command"
     ;;
 esac
-
-
-     i=2
- curl -X POST -H "Content-Type: application/json" -d \
-    '{"number":"'$i'"}' "https://httpbin.org/post"; \
