@@ -1,5 +1,47 @@
 #+title: Demo Api
 
 # Running the server
+Install
+Create a python virtual environment, then do
+#+begin_src bash
+source venv/bin/activate
+pip install -r requirements.txt
+./run_server.sh
+#+end_src
 
 # Testing interactively
+You can interact with the server using a helper script. Replace the discord token with your own, and
+run commands:
+#+begin_src bash
+# Hello World endpoint
+./test_server.sh hello
+# Download from discord endpoint
+./test_server.sh store <channel_id>
+# Get all messages endpoint
+./test_server.sh get
+# Get messages with keyword endpoint
+./test_server.sh get-key <keyword>
+# Get messages before time endpoint
+./test_server.sh get-after <timestamp>
+# Get messages before after endpoint
+./test_server.sh get-before <timestamp>
+# Get messages from channel endpoint
+./test_server.sh channel <channel>
+#+end_src
+
+An example:
+#+begin_src bash
+./test_server.sh hello
+
+./test_server.sh store 12345
+
+./test_server.sh get
+
+./test_server.sh get-key disc
+
+./test_server.sh get-after "2024-03-01T10:10:00-04:00"
+
+./test_server.sh get-before "2024-03-01T10:10:00-04:00"
+
+./test_server.sh channel 12345
+#+end_src

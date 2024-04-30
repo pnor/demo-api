@@ -20,8 +20,6 @@ case "$CMD" in
         ;;
     "store")
         echo "Running store"
-        # TODO rm
-        echo "Channel = $1"
         data='{"user_token": "'$DISCORD_TOKEN'", "channel": "'$1'"}'
         curl -H "Accept: application/json" -H "Content-Type: application/json" --data "$data" "$SERVER_URL/download"
     ;;
